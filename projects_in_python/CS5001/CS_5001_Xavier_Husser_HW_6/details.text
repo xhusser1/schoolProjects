@@ -1,0 +1,69 @@
+word_game_driver.py:
+26: ZEFAN ZHANG -- (Error) [0.0]
+	The letters in my_bag will be reassigned to 100 letters in every iteration, which the game will never end unless I enter Q. So, it needs to be moved out the while loop.
+28: ZEFAN ZHANG -- (Error) [0.0]
+	Same here, for saving your computer some computation cycles, it'd better move it out of the while loop.
+34: ZEFAN ZHANG -- (Error) [0.0]
+	This issue is from the usability perspective -- you should tell the player how many tiles are left in the bag. Otherwise, I have no way to know if I'm close to being done or not. Always for CS5001 programs -- we should be friendly and informative! Not knowing if the game is almost over is rough!
+36: ZEFAN ZHANG -- (Warning) [0.0]
+	Here has a bug, if I enter W before I enter D, your program will crash. To fix this, you can add one checking here, if the letters in play do not draw yet, tell the user they should draw the letter first.
+37: ZEFAN ZHANG -- (Warning) [0.0]
+	It'd better print the letter in paly to remind the users what letter do they have in hand.
+43: ZEFAN ZHANG -- (Error) [0.0]
+	When the user has played a word and used up some of their letters (but not all 7) we replaced only the letters that they used. From the spec: "Note that the D-draw option discards all the letters currently in play and replaces them with 7 new ones. But when the user plays a valid word, only the letters used in the word are replaced. The letters-in-play get kind of “refreshed”, if you will, but not completely replaced unless the word actually used all 7 letters."
+50: ZEFAN ZHANG -- (Error) [0.0]
+	'You have a total of', value, 'so far.' should be put outside the for loop, and the value should be replaced by the overall score. So, you should define a variable to store the total points.
+55: ZEFAN ZHANG -- (Error) [0.0]
+	Here are some other issues I found while I was playing the game.
+
+1) After I made a valid word, the program doesn't print the updated new letters in play and how many letters left for me. 
+
+2) The blank can be shared more than once. For instance, if letters in play are ['A', 'O', 'E', 'T', '_', 'G', 'T'], I made a word 'good', the program views it as a valid word.
+
+3) If I make a word with two repeated letters(such as 'zoo') but there is only one 'o' in letters in play, your program views it as a valid world and adds 'zoo' to the used_words.
+
+4) Miss comments in this file
+57: ZEFAN ZHANG -- (Info) [0.0]
+	Correctness: 0.55 * 85 = 46.75
+Readability 0.23 * 85 = 19.55
+Documentation 0.15 * 70 = 10.5
+Coding Efficiency 0.05 * 85 = 4.25
+Amazing 0.02 * 0 = 0
+Total for P2 = 81.05 -> 81
+58: ZEFAN ZHANG -- (Info) [-11.0]
+	P1: 97 * 0.5 = 48.5
+P2: 81 * 0.5 = 40.5
+Overall: 89
+==================================================
+scrabble_points.py:
+40: ZEFAN ZHANG -- (Warning) [0.0]
+	What is b doing here? You don't need it.
+43: ZEFAN ZHANG -- (Warning) [0.0]
+	Same thing here, we don't need line 43 here.
+84: ZEFAN ZHANG -- (Bonus) [0.0]
+	Well done, pass all the test cases.
+==================================================
+rxdrug_driver_v2.py:
+8: ZEFAN ZHANG -- (Info) [0.0]
+	Correctness: 0.55 * 100 = 55
+Readability 0.23 * 100 = 23
+Documentation 0.15 * 100 = 15
+Coding Efficiency 0.05 * 85 = 4.25
+Amazing 0.02 * 0 = 0
+Total for P1 = 97.25 -> 97
+==================================================
+rxdrug_functions.py:
+33: ZEFAN ZHANG -- (Bonus) [0.0]
+	Great job using the try/except block here.
+50: ZEFAN ZHANG -- (Bonus) [0.0]
+	Well done!
+77: ZEFAN ZHANG -- (Info) [0.0]
+	Since line 72 checking if len(math_list) is equal 1, it would make more sense if checking len(match_list) > 1 here.
+82: ZEFAN ZHANG -- (Info) [0.0]
+	I know Prof K required only 2-DDI in this assignment, but it'd much better if you use a for loop to dealing with the list instead of hard coding here.
+==================================================
+rxdrug.py:
+29: ZEFAN ZHANG -- (Error) [0.0]
+	Here should be:
+for element in other_drugs.
+We should iterate the given other_drugs list instead of self.interacions_list.
