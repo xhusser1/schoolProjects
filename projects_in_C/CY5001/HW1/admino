@@ -1,0 +1,86 @@
+#!/bin/bash
+#Admino Script
+#Author : Xavier Husser
+
+#first command line argument stored in variable input
+input="$1"
+
+#Help function
+if [ $input = '--help' ]
+then
+	echo -e "Welcome to the Admino system information script\nPlease follow the following instructions to use it\n
+-admino -h --> provides hostname information.
+-admino -i <interface> -->  provides the IP addres ofprovided <interface>
+-admino -u --> provides thre list of users of the system.
+-admino -g <groupname> --> provides the  list of users for an specifig <group>
+-admino -t <user> -->provides the directory list tree for a system <user>
+-admino -l --> provides the list of IPs from last remote connections
+-admino -p --> provides the top 10 processes which are using more %memory
+-admino -s --> provides the list of SUDO invoked commands from log file
+-admino -d --> provides a randomly generated strong password"
+
+elif [ $input ==  '-h' ]
+then
+	#simple command to invoke hostname information
+	hostnamectl
+
+
+elif [ $input == '-i' ]
+then
+	#uses hostname information to  find ip address of interface.
+	ip=`hostname -I | awk '{print $1'}`
+	echo "Your ip for  $2 interface is:" $ip
+
+
+elif [ $input == '-u' ]
+then
+	#prints the  first column listing the  system users  from passwd directory.
+	awk -F: 'BEGIN {print "The list of users of your system are:"} {print $1}' /etc/passwd
+
+elif [ $input == '-g' ]
+then
+	#prints output of group then searches for second parameter group name
+	#once the group name is found it prints the members by splitting at  delimiter.
+	cat /etc/group | grep $2: | awk -F ':' '{print $3, $4}'
+
+elif [ $input == '-t' ]
+then
+	#We pass the user  as the second argument for the current directory we want
+	#we want a tree hierarchy of
+	printf "Directory list for user : $2"
+	tree /home/$2
+elif [ $input == '-l' ]
+then
+	#we display five lines from the list of all users logged in along with their ip address
+	#then print out the third column with the actual ip addresses
+	#lastly we count how many times these ip addresses have appeared on the list.
+	last -5 -i | awk 'BEGIN {print "IP addresses"} {print $3}' | uniq -c
+
+elif [ $input == '-p' ]
+then
+	#We report every current process on the system sort the processes by
+	#how much memory is being used then we print out the first ten processes
+	#using the most memory with the head command
+	ps aux --sort=-%mem | head
+
+elif [ $input == '-s' ]
+then
+	#we call sudo to  execute the cat call  of the secure file which
+	#has the security logs as a superuser. We then search the security file to
+	#find a list of sudo invoked commands, however since  that can be an extensive
+	#list with hundreds of calls dating back months we use tail to output the last ten
+	#times sudo was invoked which are the most recent commands.
+	#Finally we print out the columns are looking for by filtering with awk.
+	sudo cat /var/log/secure  | grep "sudo" | tail | awk '{print "Date:"$1, $2, $3, $5, $14, $15}'
+
+elif  [ $input == '-d' ]
+then
+	#this command generates a random password by using the date in seconds since Unix epoch
+	#and using sha to hash the date , base64 to encode  data to print into standard output
+	#rev to reverse the characters for extra security then count print out the first 12 characters.
+	echo "Strong suggested password from terminal:"
+	date +%s | sha256sum | base64 | rev | head -c 12; echo
+else
+	echo "invalid command"
+
+fi
