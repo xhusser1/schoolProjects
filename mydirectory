@@ -1,0 +1,7 @@
+total 16
+-rw-r--r--   1 meghanlewis  staff  1065 Jul 18 19:31 LICENSE
+-rw-r--r--   1 meghanlewis  staff  1107 Jul 22 09:36 README.md
+-rw-r--r--   1 meghanlewis  staff     0 Sep 21 11:41 mydirectory
+drwxr-xr-x  11 meghanlewis  staff   352 Jul 22 10:16 projects_in_C
+drwxr-xr-x   3 meghanlewis  staff    96 Jul 22 11:03 projects_in_java
+drwxr-xr-x   4 meghanlewis  staff   128 Aug 17 13:18 projects_in_python
